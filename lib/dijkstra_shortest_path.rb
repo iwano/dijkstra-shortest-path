@@ -1,0 +1,2 @@
+class DijkstraShortestPath
+end
