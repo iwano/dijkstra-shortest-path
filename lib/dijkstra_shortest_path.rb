@@ -8,19 +8,21 @@ class DijkstraShortestPath
   end
 
   def execute
-    @graph.nodes.each do |node|
-      node.value = 0
-      node.current = true
-      remove_node node
-      check_closest_neighbour node
-    end
+    node = @graph.nodes.first
+    node.value = 0
+    node.current = true
+    remove_node node
+    check_closest_neighbour node
   end
 
   private
 
   def remove_node(node)
-    binding.pry
-    @unvisited.delete node
+    if node.class == 'Array'
+      @unvisited.delete(node[0])
+    else
+      @unvisited.delete(node)
+    end
   end
 
   def check_closest_neighbour(node)
@@ -28,8 +30,10 @@ class DijkstraShortestPath
       nnode[1] = node.value + nnode[1] if node_unvisited? nnode
     end
     min = node.neighbours.map { |n| [n[0].name, n[1]] }.min
-    remove_node @unvisited.select{ |n| n.name == min[0]}
+    next_node = @unvisited.select{ |n| n.name == min[0]}
+    remove_node next_node
     go_to min
+    check_closest_neighbour next_node[0]
   end
 
   def go_to(node)
