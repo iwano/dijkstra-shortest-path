@@ -35,10 +35,10 @@ describe DijkstraShortestPath do
 
       graph = Graph.new [n1, n2, n3, n4, n5, n6]
 
-      let(:shortest_path) { DijkstraShortestPath.new graph }
+      let(:shortest_path) { DijkstraShortestPath.new graph, n5 }
 
       it 'returns 2,3,6,5' do
-        shortest_path.execute.should eq [2,3,6,5]
+        shortest_path.execute.should eq ['Node 2', 'Node 3', 'Node 6', 'Node 5']
       end
     end
   end

@@ -29,5 +29,5 @@ n6.add_neighbour Axis.new(n1, 14)
 
 graph = Graph.new [n1, n2, n3, n4, n5, n6]
 
-shortest_path = DijkstraShortestPath.new graph
+shortest_path = DijkstraShortestPath.new graph, n5
 shortest_path.execute
