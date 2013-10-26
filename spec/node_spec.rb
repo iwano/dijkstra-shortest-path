@@ -12,8 +12,15 @@ describe Node do
 
   describe '#add_neighbour' do
     it 'adds the neighbour' do
-      subject.add_neighbour 'fake neighbour', 10
-      subject.neighbours.should eq [['fake neighbour', 10]]
+      subject.add_neighbour 'fake neighbour'
+      subject.neighbours.should eq ['fake neighbour']
+    end
+  end
+
+  describe '#reset_value' do
+    it 'sets the value to infinity' do
+      subject.value = 1234
+      subject.reset_value.should eq +1.0/0.0
     end
   end
 end

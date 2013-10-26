@@ -18,29 +18,26 @@ class DijkstraShortestPath
   private
 
   def remove_node(node)
-    if node.class == 'Array'
-      @unvisited.delete(node[0])
-    else
-      @unvisited.delete(node)
-    end
+    @unvisited.delete node
   end
 
   def check_closest_neighbour(node)
     node.neighbours.each do |nnode|
-      nnode[1] = node.value + nnode[1] if node_unvisited? nnode
+      nnode.node.value = node.value + nnode.value if node_unvisited? nnode.node
     end
-    min = node.neighbours.map { |n| [n[0].name, n[1]] }.min
-    next_node = @unvisited.select{ |n| n.name == min[0]}
+    min = node.neighbours.map { |n| n.node.value }.min
+    next_node = @unvisited.select{ |n| n.value == min }.first
     remove_node next_node
-    go_to min
-    check_closest_neighbour next_node[0]
+    node.reset_value
+    go_to next_node.name
+    check_closest_neighbour next_node
   end
 
   def go_to(node)
-    p "Move to node #{node[0]}"
+    p "Move to node #{node}"
   end
 
   def node_unvisited?(node)
-    @unvisited.any?{ |n| n.name == node[0].name}
+    @unvisited.any?{ |n| n.name == node.name}
   end
 end

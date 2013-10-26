@@ -5,7 +5,7 @@ class Node
   def initialize(name, neighbours=[])
     @name       = name
     @visited    = false
-    @value      = +1.0/0.0
+    @value      = reset_value
     @neighbours = neighbours
   end
 
@@ -17,7 +17,11 @@ class Node
     current
   end
 
-  def add_neighbour(neighbour, value)
-    @neighbours << [neighbour, value]
+  def add_neighbour(axis)
+    @neighbours << axis
+  end
+
+  def reset_value
+    self.value = +1.0/0.0
   end
 end
